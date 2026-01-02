@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fox Engineers | Patented Forklift Towing Attachment</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --color-bg-main: #0e0e0e;
+            --color-bg-secondary: #141414;
+            --color-bg-tertiary: #1a1a1a;
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #b3b3b3;
+            --color-orange: #FF5500;
+            --section-spacing: 100px;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px; /* Offset for sticky header */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-main);
+            color: var(--color-text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* Smoother text on mobile */
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Responsive Type Handling */
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
+        h2 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        p { color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        section {
+            padding: var(--section-spacing) 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-orange);
+            margin-bottom: 20px;
+            display: block;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--color-orange);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border: 2px solid var(--color-orange);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn:hover { background-color: transparent; color: var(--color-orange); }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--color-text-primary);
+        }
+        .btn-outline:hover { border-color: var(--color-orange); color: var(--color-orange); }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 0;
+            background: rgba(14, 14, 14, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--color-orange); }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.9rem; font-weight: 500; opacity: 0.7; }
+        .nav-links a:hover { opacity: 1; color: var(--color-orange); }
+
+        /* --- HERO SECTION --- */
+        #home {
+            height: 100vh;
+            min-height: 600px; /* Reduced min-height for mobile screens */
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(14,14,14,0.85), rgba(14,14,14,0.7)), url('image_0.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Desktop only */
+        }
+        .hero-content { max-width: 700px; width: 100%; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+        }
+        .info-card {
+            background: var(--color-bg-secondary);
+            padding: 30px;
+            border-left: 3px solid var(--color-orange);
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+
+        /* --- PARTNERS SECTION --- */
+        #partners { background: var(--color-bg-secondary); }
+        .partners-header { text-align: center; margin-bottom: 50px; }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .partner-logo-box {
+            height: 100px;
+            background: var(--color-bg-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* --- PRODUCT SECTION --- */
+        .product-header { text-align: center; max-width: 800px; margin: 0 auto 60px auto; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+        .feature-box {
+            background: var(--color-bg-secondary);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 3px solid transparent;
+        }
+        
+        /* Video */
+        .video-section-header { text-align: center; margin-bottom: 30px; }
+        .video-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(45deg, #1a1a1a, #222);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        .play-btn-inner {
+            width: 70px; height: 70px;
+            background: var(--color-orange);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        .play-arrow {
+            width: 0; height: 0; 
+            border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+            border-left: 16px solid white; margin-left: 4px;
+        }
+
+        /* --- GALLERY SECTION --- */
+        #gallery { background: var(--color-bg-secondary); }
+        .gallery-header { text-align: center; margin-bottom: 50px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            position: relative;
+            height: 300px; /* Reduced for mobile fitting */
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .contact-details-block { margin-top: 40px; }
+        .contact-item strong { display: block; color: var(--color-orange); font-family: 'Playfair Display', serif; margin-bottom: 5px; }
+        .map-container {
+            margin-top: 30px;
+            height: 250px;
+            width: 100%;
+            background: #222;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+        }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        
+        .form-group { margin-bottom: 20px; }
+        input, textarea {
+            width: 100%;
+            background: var(--color-bg-secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text-primary);
+            font-size: 16px; /* Prevents iOS zoom on input focus */
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .footer-links {
+            display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; flex-wrap: wrap;
+        }
+        .footer-links a { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
+        .copyright { font-size: 0.8rem; opacity: 0.5; }
+
+
+        /* =========================================
+           MOBILE OPTIMIZATION (MEDIA QUERIES) 
+           ========================================= */
+        
+        @media (max-width: 1024px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .feature-grid, .partners-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-item { height: 250px; }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 60px; /* Reduces vertical spacing on mobile */
+            }
+
+            /* Typography Scaling */
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            h3 { font-size: 1.3rem; }
+            p { font-size: 0.95rem; }
+
+            /* Navigation */
+            .nav-links { display: none; } /* Simplified nav for mobile */
+            header .container { padding: 0 1.5rem; }
+
+            /* Utilities */
+            .container { padding: 0 1.5rem; }
+
+            /* Hero Fixes */
+            #home {
+                background-attachment: scroll; /* Fixes mobile scroll glitch */
+                background-position: center;
+                height: auto;
+                min-height: 100vh;
+                padding-top: 80px; /* Space for nav */
+            }
+            .hero-content { text-align: center; }
+            .btn-group { justify-content: center; width: 100%; }
+            .btn { width: 100%; } /* Full width buttons on mobile */
+
+            /* Grids -> Single Column Stacks */
+            .about-grid, 
+            .contact-grid { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+            }
+            
+            .feature-grid, 
+            .partners-grid { 
+                grid-template-columns: 1fr; 
+                gap: 20px; 
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr; /* Single column gallery on mobile */
+                gap: 15px;
+            }
+            .gallery-item { height: 250px; }
+
+            /* Video Height */
+            .video-placeholder { height: 300px; }
+
+            /* Footer */
+            .footer-links { gap: 15px; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">FOX <span>ENGINEERS</span></div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#partners">Partners</a></li>
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <a href="#contact" class="btn" style="padding: 10px 24px; width: auto;">Enquire</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <div class="hero-content reveal">
+                <h1>Patented Forklift Towing Attachment</h1>
+                <p class="hero-subtext">Engineered for safe, efficient, and reliable handling operations. The glowing standard for industrial towing solutions.</p>
+                <div class="btn-group">
+                    <a href="#product" class="btn">View Product</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <span class="section-label">About Us</span>
+                    <h2>Engineering practical handling solutions.</h2>
+                    <p>We are an Australian manufacturer specializing in forklift attachments designed for safe and efficient handling of trailers, campers, and vehicles.</p>
+                    <p>Our solutions are engineered to simplify material handling challenges across manufacturing facilities, logistics yards, and storage environments.</p>
+                </div>
+                <div class="about-cards reveal" style="transition-delay: 0.1s;">
+                    <div class="info-card">
+                        <h4>Our Approach</h4>
+                        <p>Practical engineering—designing robust, reliable products that integrate seamlessly into existing operations.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Safety & Durability</h4>
+                        <p>Developed with a strong focus on safety compliance and built to withstand daily industrial use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <div class="container">
+            <div class="partners-header reveal">
+                <span class="section-label">Our Network</span>
+                <h2>Trusted Partners</h2>
+            </div>
+            <div class="partners-grid reveal">
+                <div class="partner-logo-box">Partner Logo 1</div>
+                <div class="partner-logo-box">Partner Logo 2</div>
+                <div class="partner-logo-box">Partner Logo 3</div>
+                <div class="partner-logo-box">Partner Logo 4</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="product">
+        <div class="container">
+            <div class="product-header reveal">
+                <span class="section-label">The Solution</span>
+                <h2>Heavy-Duty Trailer Handling</h2>
+                <p>Safely lift, maneuver, and position trailers with precision using standard forklifts.</p>
+            </div>
+
+            <div class="feature-grid reveal">
+                <div class="feature-box">
+                    <h3>Compatibility</h3>
+                    <p>Fits standard forklift tynes seamlessly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>High Capacity</h3>
+                    <p>Engineered for heavy loads.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Aus Standards</h3>
+                    <p>Manufactured to strict safety standards.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Patented Design</h3>
+                    <p>Unique technology for superior performance.</p>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <div class="video-section-header">
+                    <span class="section-label">See it in action</span>
+                    <h3>Operational Demonstration</h3>
+                </div>
+                <div class="video-placeholder">
+                    <div class="play-btn-inner">
+                        <div class="play-arrow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <div class="gallery-header reveal">
+                <span class="section-label">Visuals</span>
+                <h2>Product Gallery</h2>
+            </div>
+            <div class="gallery-grid reveal">
+                <div class="gallery-item">
+                    <img src="image_1.png" alt="Forklift attachment in warehouse">
+                </div>
+                <div class="gallery-item">
+                    <img src="image_2.png" alt="Component identification diagram">
+                </div>
+                <div class="gallery-item">
+                    <img src="image_4.png" alt="Attachment on forklift front view">
+                </div>
+                <div class="gallery-item">
+                    <img src="image_5.png" alt="Attachment top down view">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <span class="section-label">Get in Touch</span>
+                    <h2>Enquire Today</h2>
+                    <p>Contact our team for a tailored solution for your operations.</p>
+                    
+                    <div class="contact-details-block">
+                        <div class="contact-item">
+                            <strong>Head Office</strong>
+                            <p>Federation Square, Melbourne VIC 3000, Australia</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Contact</strong>
+                            <p>TEL: (03) 9655 1900<br>Email: info@foxengineers.com.au</p>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9671593153169!3d-37.81720997975159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642b8c2135617%3A0x5045675218ce7e0!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1620612345678!5m2!1sen!2sau" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="contact-form-block reveal">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Company Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="6" placeholder="Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#partners">Partners</a>
+                <a href="#product">Product</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="copyright">© 2025 FOX Engineers. All rights reserved. Patented Design.</p>
+        </div>
+    </footer>
+
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+        revealElements.forEach((el) => revealOnScroll.observe(el));
+    </script>
+</body>
+</html>
